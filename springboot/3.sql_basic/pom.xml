@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>restapi</artifactId>
+	<artifactId>sql_basic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>restapi</name>
+	<name>sql_basic</name>
 	<description>Tutorial project for Spring Boot</description>
 
 	<properties>
@@ -25,6 +25,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
