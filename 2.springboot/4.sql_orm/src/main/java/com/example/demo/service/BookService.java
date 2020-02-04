@@ -2,6 +2,9 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +23,26 @@ public class BookService {
     @Autowired private AuthorRepository authorRepository;
     @Autowired private CategoryRepository categoryRepository;
     
+    @PersistenceContext private EntityManager em;
+    
     public long countBooks() {
         return bookRepository.count();
+    }
+    
+    public List<Book> getByAuthor(String authorName) {
+        var cb = em.getCriteriaBuilder();
+        var cq = cb.createQuery(Book.class);
+        var book = cq.from(Book.class);
+        var author = book.join("author");
+        
+        cq.select(book)
+          .where(
+             cb.like(author.get("name"), "%" + authorName + "%")             
+          );
+        
+        
+        var query = em.createQuery(cq);
+        return query.getResultList();
     }
     
     @Transactional 
