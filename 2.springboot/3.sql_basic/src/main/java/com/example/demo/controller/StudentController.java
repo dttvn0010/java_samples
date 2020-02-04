@@ -55,13 +55,13 @@ public class StudentController {
     public ResponseEntity<?> searchStudent(@RequestParam("keyword") String keyword, 
                                             @RequestParam("start") int start, 
                                             @RequestParam("count") int count) {
-        var lst = studentService.search(keyword, start, count);
+        var lst = studentService.search2(keyword, start, count);
         return ResponseEntity.ok(lst);
     }
     
     @GetMapping("/count_student")
     public long countStudent(@RequestParam("keyword") String keyword) {
-        return studentService.countSearch(keyword);
+        return studentService.countSearch2(keyword);
     }
     
     @PostMapping("/add_student")

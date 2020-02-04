@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
+import com.example.demo.utils.SQLUtils;
 
 @Service
 public class StudentService {
@@ -21,6 +23,8 @@ public class StudentService {
     @Autowired private StudentRepository studentRepository;
     
     @PersistenceContext private EntityManager em;
+    
+    private final Properties SQL_PROPS = SQLUtils.readProperties("sql/student.sql.properties");
                 
     public List<Student> getAll() {
         var students = new ArrayList<Student>();
@@ -78,7 +82,7 @@ public class StudentService {
     }
     
     public List<Student> search2(String keyword, int start, int count) {
-        var queryStr = "SELECT s FROM Student s WHERE name LIKE ?1 OR studentNo LIKE ?2";
+        var queryStr = (String) SQL_PROPS.get("student.search");
         var query = em.createQuery(queryStr, Student.class);
         query.setParameter(1, "%" + keyword + "%");
         query.setParameter(2, "%" + keyword + "%");
@@ -103,7 +107,7 @@ public class StudentService {
     }
     
     public long countSearch2(String keyword) {
-        var queryStr = "SELECT COUNT(s) FROM Student s WHERE name LIKE ?1 OR studentNo LIKE ?2";
+        var queryStr = (String) SQL_PROPS.get("student.count");
         var query = em.createQuery(queryStr, Long.class);
         query.setParameter(1, "%" + keyword + "%");
         query.setParameter(2, "%" + keyword + "%");
