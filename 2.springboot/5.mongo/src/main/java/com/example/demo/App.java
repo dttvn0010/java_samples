@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.service.BookService;
 
 @SpringBootApplication
-public class DemoApplication  {
+public class App {
     
 	public static void main(String[] args) {
 		var context = SpringApplication.run(DemoApplication.class, args);
