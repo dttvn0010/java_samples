@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +23,6 @@ public class SampleController {
 
     @Autowired
     JWTTokenProvider tokenProvider;
-    
-    @Autowired
-    UserDetailsService userDetailsService;
     
     @PostMapping("/api/auth/sign_in")
     public ResponseEntity<?> authenticateUser(@RequestBody Map<String, String> params) {
