@@ -9,7 +9,7 @@ import com.example.demo.service.BookService;
 public class App {
     
 	public static void main(String[] args) {
-		var context = SpringApplication.run(DemoApplication.class, args);
+		var context = SpringApplication.run(App.class, args);
 		var bookService = context.getBean(BookService.class);
 		if(bookService.countBooks() == 0) {
 		    bookService.initDatabase();
